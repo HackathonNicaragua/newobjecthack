@@ -54,15 +54,52 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <GridView
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+            <TableRow
                 android:id="@+id/grid"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:columnWidth="100dp"
-                android:gravity="center"
-                android:listSelector="#00000000"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth" />
+                >
+
+                <Button
+                    android:id="@+id/btn_citas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Citas" />
+
+                <Button
+                    android:id="@+id/btn_examenes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Examenes" />
+
+                <Button
+                    android:id="@+id/btn_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chat" />
+
+                <Button
+                    android:id="@+id/btn_hcsp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HCSP" />
+            </TableRow>
+
+    <TableRow
+        android:id="@+id/table_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_infosalud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="InfoSalud" />
+    </TableRow>
+</TableLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
