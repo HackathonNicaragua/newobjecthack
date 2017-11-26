@@ -12,7 +12,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Database extends SQLiteOpenHelper {
 
         //Sentencia SQL para crear la tabla de contacto
-        String sqlCreateCitas = "CREATE TABLE Citas (ID INTEGER PRIMARY KEY,Nombre TEXT, Notificacion TEXT, Aviso INTEGER)";
+        String sqlCreateCitas = "CREATE TABLE Citas (Id_Cite INTEGER PRIMARY KEY,Descripcion TEXT, Fecha TEXT, EdadGestacional INTEGER," +
+                " Id_paciente INTEGER, PA TEXT, AlturaUterina TEXT, Presentacion TEXT )";
 
 
     public Database(Context contexto, String nombre,

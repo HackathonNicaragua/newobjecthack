@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MiBebe</string>
+    <string name="action_settings">Settings</string>
+    <string name="citas">Citas</string>
+    <string name="examenes">Examenes</string>
+    <string name="hcsp">HCSP</string>
+    <string name="infosalud">InfoSalud</string>
+    <string name="chat">Chat</string>
+    <string name="imagencitas">ImagenCitas</string>
+    <string name="imagenexamenes">ImagenExamenes</string>
 </resources>
