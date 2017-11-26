@@ -16,11 +16,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
         </activity>
-        <activity android:name=".Citas">
+        <activity android:name=".Citas"></activity>
+        <activity
+            android:name=".Activity_chat"
+            android:label="@string/title_activity_chat"
+                  android:theme="@style/AppTheme"></activity>
 
-        </activity>
 
         <activity android:name=".Examenes">
 
@@ -29,7 +31,9 @@
         <activity android:name=".Chat">
             
         </activity>
-
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 </manifest>
