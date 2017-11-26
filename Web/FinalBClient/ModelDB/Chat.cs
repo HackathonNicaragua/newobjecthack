@@ -12,7 +12,7 @@ namespace FinalBClient.ModelDB
     using System;
     using System.Collections.Generic;
     
-    public partial class Chat
+    public partial class Chats
     {
         public int Id_Chat { get; set; }
         public Nullable<int> Numero { get; set; }
