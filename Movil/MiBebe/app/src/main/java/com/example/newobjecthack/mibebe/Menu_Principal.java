@@ -21,9 +21,10 @@ import java.util.ArrayList;
 public class Menu_Principal extends AppCompatActivity{
 
 
-ListView listView;
+    ListView listView;
     ImageButton btn_citas;
-
+    ImageButton btn_examenes;
+    ImageButton btn_chat;
 
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -47,6 +48,9 @@ ListView listView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__principal);
         btn_citas= (ImageButton) findViewById(R.id.btn_citas);
+        btn_examenes = (ImageButton) findViewById(R.id.btn_examenes);
+        btn_chat = (ImageButton) findViewById(R.id.btn_chat);
+
 
         btn_citas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +60,28 @@ ListView listView;
 
                 Intent MyIntent= new Intent(Menu_Principal.this, Citas.class);
                 startActivity(MyIntent);
+            }
+        });
+
+        btn_examenes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Iniciar Activity Examenes
+
+                Intent Myintent= new Intent(Menu_Principal.this, Examenes.class);
+                startActivity(Myintent);
+            }
+        });
+
+        btn_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Iniciar Activity Chat
+
+                Intent Myintent= new Intent(Menu_Principal.this, Chat.class);
+                startActivity(Myintent);
             }
         });
 
@@ -76,6 +102,6 @@ ListView listView;
     }
 
 
-
-
 }
+
+

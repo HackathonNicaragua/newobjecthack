@@ -15,10 +15,6 @@ import android.widget.TextView;
 
 public class Notificaciones_Adapter extends ArrayAdapter {
 
-    //Arreglo boleano para capturar el estado del checkbox
-
-    boolean[] checkBoxState;
-
 
     //Referencia al activity
     private final Activity context;
