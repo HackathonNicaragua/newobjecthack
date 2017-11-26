@@ -55,10 +55,10 @@ public class Activity_chat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //lmensajes = (ListView) findViewById(R.id.list_messages);
         txtmensaje = (TextView) findViewById(R.id.input);
-        setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
         /*TIM = new Timer();
         TimerTask timerTask;
         {

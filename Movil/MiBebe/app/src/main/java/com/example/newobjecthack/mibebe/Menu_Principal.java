@@ -80,7 +80,7 @@ public class Menu_Principal extends AppCompatActivity{
 
                 //Iniciar Activity Chat
 
-                Intent Myintent= new Intent(Menu_Principal.this, Chat.class);
+                Intent Myintent= new Intent(Menu_Principal.this, Activity_chat.class);
                 startActivity(Myintent);
             }
         });
