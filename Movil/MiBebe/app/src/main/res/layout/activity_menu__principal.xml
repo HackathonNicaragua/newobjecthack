@@ -20,7 +20,7 @@
             app:expandedTitleMarginStart="@dimen/expanded_toolbar_title_margin_start"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-         <!--   <ImageView
+            <!--   <ImageView
                 android:id="@+id/image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -84,14 +84,14 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:id="@+id/btn_hcsp"
+            android:id="@+id/btn_chat"
             android:layout_width="180dp"
             android:layout_height="140dp"
             android:backgroundTint="#FFFFFF"
-            android:contentDescription="@string/hcsp"
+            android:contentDescription="@string/chat"
             android:scaleType="fitXY"
-            android:src="@drawable/hcp"
-            android:text="@string/hcsp" />
+            android:src="@drawable/chat"
+            android:text="@string/chat" />
 
         <ImageButton
             android:id="@+id/btn_infosalud"
@@ -110,17 +110,43 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:id="@+id/btn_chat"
+            android:id="@+id/btn_tratamientos"
             android:layout_width="180dp"
             android:layout_height="140dp"
             android:backgroundTint="#FFFFFF"
-            android:contentDescription="@string/chat"
+            android:contentDescription="tratamientos"
             android:scaleType="fitXY"
-            android:src="@drawable/chat"
-            android:text="@string/chat" />
+            android:src="@drawable/tratamientos"
+            android:text="@string/tratamientos" />
+
+        <ImageButton
+            android:id="@+id/btn_hcsp"
+            android:layout_width="180dp"
+            android:layout_height="140dp"
+            android:backgroundTint="#FFFFFF"
+            android:contentDescription="@string/hcsp"
+            android:scaleType="fitXY"
+            android:src="@drawable/hcp"
+            android:text="@string/hcsp" />
+
+
     </TableRow>
+
+
 </TableLayout>
+
+            <ImageButton
+                android:id="@+id/btn_acercade"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#FFFFFF"
+                android:contentDescription="logo"
+                android:src="@drawable/acercade"
+                android:text="@string/logo" />
         </LinearLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
