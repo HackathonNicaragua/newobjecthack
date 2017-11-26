@@ -17,7 +17,6 @@ public class Citas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Lammar la vista desde Menu_principal.xml
         setContentView(R.layout.layout_citas);
-
         Notificaciones_Adapter whatever = new Notificaciones_Adapter(this, fecha, titulo,descripcion, imagen);
         listView = (ListView) findViewById(R.id.lista_notificaciones);
         listView.setAdapter(whatever);
