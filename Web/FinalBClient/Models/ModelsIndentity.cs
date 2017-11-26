@@ -21,7 +21,7 @@ namespace FinalBClient.Models
         public string US { get; set; }
     }
 
-    public class ModelDeletePeople
+    public class ModelDeleteOrUpdatePeople
     {
         public string Cedula { get; set; }
     }

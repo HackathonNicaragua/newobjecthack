@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MiBeBe_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MiBeBe_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Chat">
@@ -219,8 +219,7 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
             <End Role="Tratamiento" EntitySet="Tratamiento" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MiBeBe_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -257,7 +256,7 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
           <Property Name="Nombres" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Apellidos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Especialidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Chats" Relationship="Self.FK__Chat__Id_Doctor__5FB337D6" FromRole="Doctor" ToRole="Chat" />
+          <NavigationProperty Name="Chats" Relationship="MiBeBe_DatabaseModel.FK__Chat__Id_Doctor__5FB337D6" FromRole="Doctor" ToRole="Chat" />
         </EntityType>
         <EntityType Name="Examan">
           <Key>
@@ -296,8 +295,8 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
           <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__Id_Pacient__5165187F" FromRole="Paciente" ToRole="Cita" />
           <NavigationProperty Name="CitaProgramada" Relationship="Self.FK__CitaProgr__Id_Ci__5CD6CB2B" FromRole="Paciente" ToRole="CitaProgramada" />
           <NavigationProperty Name="Examen" Relationship="Self.FK__Examen__Id_Pacie__571DF1D5" FromRole="Paciente" ToRole="Examen" />
-          <NavigationProperty Name="Chats" Relationship="Self.FK__Chat__Id_Pacient__5EBF139D" FromRole="Paciente" ToRole="Chat" />
           <NavigationProperty Name="Tratamientoes" Relationship="Self.FK__Tratamien__Id_Pa__5441852A" FromRole="Paciente" ToRole="Tratamiento" />
+          <NavigationProperty Name="Chats" Relationship="MiBeBe_DatabaseModel.FK__Chat__Id_Pacient__5EBF139D" FromRole="Paciente" ToRole="Chat" />
         </EntityType>
         <EntityType Name="Tratamiento">
           <Key>
@@ -320,18 +319,6 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
           <Property Name="Nombres" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Chat">
-          <Key>
-            <PropertyRef Name="Id_Chat" />
-          </Key>
-          <Property Name="Id_Chat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Numero" Type="Int32" />
-          <Property Name="Cuerpo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Paciente" Type="Int32" />
-          <Property Name="Id_Doctor" Type="Int32" />
-          <NavigationProperty Name="Doctor" Relationship="Self.FK__Chat__Id_Doctor__5FB337D6" FromRole="Chat" ToRole="Doctor" />
-          <NavigationProperty Name="Paciente" Relationship="Self.FK__Chat__Id_Pacient__5EBF139D" FromRole="Chat" ToRole="Paciente" />
         </EntityType>
         <Association Name="FK__Cita__Id_Pacient__5165187F">
           <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
@@ -357,18 +344,6 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Chat__Id_Doctor__5FB337D6">
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
-          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Doctor">
-              <PropertyRef Name="Id_Doctor" />
-            </Principal>
-            <Dependent Role="Chat">
-              <PropertyRef Name="Id_Doctor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Examen__Id_Pacie__571DF1D5">
           <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
           <End Role="Examen" Type="Self.Examan" Multiplicity="*" />
@@ -377,18 +352,6 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
               <PropertyRef Name="Id_Paciente" />
             </Principal>
             <Dependent Role="Examen">
-              <PropertyRef Name="Id_Paciente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Chat__Id_Pacient__5EBF139D">
-          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
-          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Paciente">
-              <PropertyRef Name="Id_Paciente" />
-            </Principal>
-            <Dependent Role="Chat">
               <PropertyRef Name="Id_Paciente" />
             </Dependent>
           </ReferentialConstraint>
@@ -414,7 +377,6 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
           <EntitySet Name="Pacientes" EntityType="Self.Paciente" />
           <EntitySet Name="Tratamientoes" EntityType="Self.Tratamiento" />
           <EntitySet Name="US" EntityType="Self.US" />
-          <EntitySet Name="Chats" EntityType="Self.Chat" />
           <AssociationSet Name="FK__Cita__Id_Pacient__5165187F" Association="Self.FK__Cita__Id_Pacient__5165187F">
             <End Role="Paciente" EntitySet="Pacientes" />
             <End Role="Cita" EntitySet="Citas" />
@@ -423,23 +385,60 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
             <End Role="Paciente" EntitySet="Pacientes" />
             <End Role="CitaProgramada" EntitySet="CitaProgramadas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Chat__Id_Doctor__5FB337D6" Association="Self.FK__Chat__Id_Doctor__5FB337D6">
-            <End Role="Doctor" EntitySet="Doctors" />
-            <End Role="Chat" EntitySet="Chats" />
-          </AssociationSet>
           <AssociationSet Name="FK__Examen__Id_Pacie__571DF1D5" Association="Self.FK__Examen__Id_Pacie__571DF1D5">
             <End Role="Paciente" EntitySet="Pacientes" />
             <End Role="Examen" EntitySet="Examen" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Chat__Id_Pacient__5EBF139D" Association="Self.FK__Chat__Id_Pacient__5EBF139D">
-            <End Role="Paciente" EntitySet="Pacientes" />
-            <End Role="Chat" EntitySet="Chats" />
           </AssociationSet>
           <AssociationSet Name="FK__Tratamien__Id_Pa__5441852A" Association="Self.FK__Tratamien__Id_Pa__5441852A">
             <End Role="Paciente" EntitySet="Pacientes" />
             <End Role="Tratamiento" EntitySet="Tratamientoes" />
           </AssociationSet>
+          <EntitySet Name="Chats" EntityType="MiBeBe_DatabaseModel.Chat" />
+          <AssociationSet Name="FK__Chat__Id_Doctor__5FB337D6" Association="MiBeBe_DatabaseModel.FK__Chat__Id_Doctor__5FB337D6">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Chat" EntitySet="Chats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Chat__Id_Pacient__5EBF139D" Association="MiBeBe_DatabaseModel.FK__Chat__Id_Pacient__5EBF139D">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Chat" EntitySet="Chats" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="Id_Chat" />
+          </Key>
+          <Property Name="Id_Chat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="Int32" />
+          <Property Name="Cuerpo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Paciente" Type="Int32" />
+          <Property Name="Id_Doctor" Type="Int32" />
+          <NavigationProperty Name="Doctor" Relationship="MiBeBe_DatabaseModel.FK__Chat__Id_Doctor__5FB337D6" FromRole="Chat" ToRole="Doctor" />
+          <NavigationProperty Name="Paciente" Relationship="MiBeBe_DatabaseModel.FK__Chat__Id_Pacient__5EBF139D" FromRole="Chat" ToRole="Paciente" />
+        </EntityType>
+        <Association Name="FK__Chat__Id_Doctor__5FB337D6">
+          <End Type="MiBeBe_DatabaseModel.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <End Type="MiBeBe_DatabaseModel.Chat" Role="Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id_Doctor" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Id_Doctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Chat__Id_Pacient__5EBF139D">
+          <End Type="MiBeBe_DatabaseModel.Paciente" Role="Paciente" Multiplicity="0..1" />
+          <End Type="MiBeBe_DatabaseModel.Chat" Role="Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -544,11 +543,11 @@ advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida 
           <EntitySetMapping Name="Chats">
             <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.Chat">
               <MappingFragment StoreEntitySet="Chat">
-                <ScalarProperty Name="Id_Chat" ColumnName="Id_Chat" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
-                <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
-                <ScalarProperty Name="Id_Paciente" ColumnName="Id_Paciente" />
                 <ScalarProperty Name="Id_Doctor" ColumnName="Id_Doctor" />
+                <ScalarProperty Name="Id_Paciente" ColumnName="Id_Paciente" />
+                <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Id_Chat" ColumnName="Id_Chat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
