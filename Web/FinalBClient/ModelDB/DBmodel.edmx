@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MiBeBe_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MiBeBe_Database.dbo.Chat' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="Id_Chat" />
+          </Key>
+          <Property Name="Id_Chat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="int" />
+          <Property Name="Cuerpo" Type="varchar" MaxLength="200" />
+          <Property Name="Id_Paciente" Type="int" />
+          <Property Name="Id_Doctor" Type="int" />
+        </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="Id_Cita" />
+          </Key>
+          <Property Name="Id_Cita" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="EdadGestacional" Type="int" />
+          <Property Name="Id_Paciente" Type="int" />
+          <Property Name="PA" Type="varchar" MaxLength="20" />
+          <Property Name="AlturaUterina" Type="int" />
+          <Property Name="Presentacion" Type="varchar" MaxLength="59" />
+        </EntityType>
+        <EntityType Name="CitaProgramada">
+          <Key>
+            <PropertyRef Name="Id_Cita" />
+          </Key>
+          <Property Name="Id_Cita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Paciente" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Estado" Type="int" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id_Doctor" />
+          </Key>
+          <Property Name="Id_Doctor" Type="int" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="20" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="20" />
+          <Property Name="Especialidad" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Examen">
+          <Key>
+            <PropertyRef Name="Id_Examen" />
+          </Key>
+          <Property Name="Id_Examen" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="25" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Resultados" Type="varchar" MaxLength="100" />
+          <Property Name="Id_Paciente" Type="int" />
+          <Property Name="Interpretacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="InfoSalud">
+          <Key>
+            <PropertyRef Name="Id_Info" />
+          </Key>
+          <Property Name="Id_Info" Type="int" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="Id_Paciente" />
+          </Key>
+          <Property Name="Id_Paciente" Type="int" Nullable="false" />
+          <Property Name="Cedula" Type="varchar" MaxLength="20" />
+          <Property Name="Nombres" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Localidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="FechaNac" Type="datetime" />
+          <Property Name="US" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tratamiento">
+          <Key>
+            <PropertyRef Name="Id_Tratamiento" />
+          </Key>
+          <Property Name="Id_Tratamiento" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Id_Paciente" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="HoraInicio" Type="time" Precision="7" />
+          <Property Name="Dosis" Type="varchar" MaxLength="40" />
+          <Property Name="Tiempo" Type="int" />
+        </EntityType>
+        <EntityType Name="US">
+          <Key>
+            <PropertyRef Name="Id_US" />
+          </Key>
+          <Property Name="Id_US" Type="int" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="20" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" />
+        </EntityType>
+        <Association Name="FK__Chat__Id_Doctor__5FB337D6">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id_Doctor" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Id_Doctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Chat__Id_Pacient__5EBF139D">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__Id_Pacient__5165187F">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CitaProgr__Id_Ci__5CD6CB2B">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="CitaProgramada" Type="Self.CitaProgramada" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="CitaProgramada">
+              <PropertyRef Name="Id_Cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examen__Id_Pacie__571DF1D5">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Examen" Type="Self.Examen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Examen">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tratamien__Id_Pa__5441852A">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Tratamiento" Type="Self.Tratamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Tratamiento">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MiBeBe_DatabaseModelStoreContainer">
+          <EntitySet Name="Cita" EntityType="Self.Cita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CitaProgramada" EntityType="Self.CitaProgramada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examen" EntityType="Self.Examen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoSalud" EntityType="Self.InfoSalud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tratamiento" EntityType="Self.Tratamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="US" EntityType="Self.US" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chat" EntityType="Self.Chat" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Chat].[Id_Chat] AS [Id_Chat], 
+    [Chat].[Numero] AS [Numero], 
+    [Chat].[Cuerpo] AS [Cuerpo], 
+    [Chat].[Id_Paciente] AS [Id_Paciente], 
+    [Chat].[Id_Doctor] AS [Id_Doctor]
+    FROM [dbo].[Chat] AS [Chat]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Chat__Id_Doctor__5FB337D6" Association="Self.FK__Chat__Id_Doctor__5FB337D6">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Chat__Id_Pacient__5EBF139D" Association="Self.FK__Chat__Id_Pacient__5EBF139D">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__Id_Pacient__5165187F" Association="Self.FK__Cita__Id_Pacient__5165187F">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CitaProgr__Id_Ci__5CD6CB2B" Association="Self.FK__CitaProgr__Id_Ci__5CD6CB2B">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="CitaProgramada" EntitySet="CitaProgramada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examen__Id_Pacie__571DF1D5" Association="Self.FK__Examen__Id_Pacie__571DF1D5">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Examen" EntitySet="Examen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tratamien__Id_Pa__5441852A" Association="Self.FK__Tratamien__Id_Pa__5441852A">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Tratamiento" EntitySet="Tratamiento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MiBeBe_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="Id_Cita" />
+          </Key>
+          <Property Name="Id_Cita" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="EdadGestacional" Type="Int32" />
+          <Property Name="Id_Paciente" Type="Int32" />
+          <Property Name="PA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AlturaUterina" Type="Int32" />
+          <Property Name="Presentacion" Type="String" MaxLength="59" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK__Cita__Id_Pacient__5165187F" FromRole="Cita" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="CitaProgramada">
+          <Key>
+            <PropertyRef Name="Id_Cita" />
+          </Key>
+          <Property Name="Id_Cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Paciente" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="Int32" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK__CitaProgr__Id_Ci__5CD6CB2B" FromRole="CitaProgramada" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id_Doctor" />
+          </Key>
+          <Property Name="Id_Doctor" Type="Int32" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Especialidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Chats" Relationship="MiBeBe_DatabaseModel.FK__Chat__Id_Doctor__5FB337D6" FromRole="Doctor" ToRole="Chat" />
+        </EntityType>
+        <EntityType Name="Examan">
+          <Key>
+            <PropertyRef Name="Id_Examen" />
+          </Key>
+          <Property Name="Id_Examen" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Resultados" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Paciente" Type="Int32" />
+          <Property Name="Interpretacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK__Examen__Id_Pacie__571DF1D5" FromRole="Examen" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="InfoSalud">
+          <Key>
+            <PropertyRef Name="Id_Info" />
+          </Key>
+          <Property Name="Id_Info" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="Id_Paciente" />
+          </Key>
+          <Property Name="Id_Paciente" Type="Int32" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="FechaNac" Type="DateTime" Precision="3" />
+          <Property Name="US" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__Id_Pacient__5165187F" FromRole="Paciente" ToRole="Cita" />
+          <NavigationProperty Name="CitaProgramada" Relationship="Self.FK__CitaProgr__Id_Ci__5CD6CB2B" FromRole="Paciente" ToRole="CitaProgramada" />
+          <NavigationProperty Name="Examen" Relationship="Self.FK__Examen__Id_Pacie__571DF1D5" FromRole="Paciente" ToRole="Examen" />
+          <NavigationProperty Name="Tratamientoes" Relationship="Self.FK__Tratamien__Id_Pa__5441852A" FromRole="Paciente" ToRole="Tratamiento" />
+          <NavigationProperty Name="Chats" Relationship="MiBeBe_DatabaseModel.FK__Chat__Id_Pacient__5EBF139D" FromRole="Paciente" ToRole="Chat" />
+        </EntityType>
+        <EntityType Name="Tratamiento">
+          <Key>
+            <PropertyRef Name="Id_Tratamiento" />
+          </Key>
+          <Property Name="Id_Tratamiento" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Paciente" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HoraInicio" Type="Time" Precision="7" />
+          <Property Name="Dosis" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Tiempo" Type="Int32" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK__Tratamien__Id_Pa__5441852A" FromRole="Tratamiento" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="US">
+          <Key>
+            <PropertyRef Name="Id_US" />
+          </Key>
+          <Property Name="Id_US" Type="Int32" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__Cita__Id_Pacient__5165187F">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CitaProgr__Id_Ci__5CD6CB2B">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="CitaProgramada" Type="Self.CitaProgramada" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="CitaProgramada">
+              <PropertyRef Name="Id_Cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examen__Id_Pacie__571DF1D5">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Examen" Type="Self.Examan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Examen">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tratamien__Id_Pa__5441852A">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Tratamiento" Type="Self.Tratamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Tratamiento">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MiBeBe_DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Citas" EntityType="Self.Cita" />
+          <EntitySet Name="CitaProgramadas" EntityType="Self.CitaProgramada" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="Examen" EntityType="Self.Examan" />
+          <EntitySet Name="InfoSaluds" EntityType="Self.InfoSalud" />
+          <EntitySet Name="Pacientes" EntityType="Self.Paciente" />
+          <EntitySet Name="Tratamientoes" EntityType="Self.Tratamiento" />
+          <EntitySet Name="US" EntityType="Self.US" />
+          <AssociationSet Name="FK__Cita__Id_Pacient__5165187F" Association="Self.FK__Cita__Id_Pacient__5165187F">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Cita" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CitaProgr__Id_Ci__5CD6CB2B" Association="Self.FK__CitaProgr__Id_Ci__5CD6CB2B">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="CitaProgramada" EntitySet="CitaProgramadas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examen__Id_Pacie__571DF1D5" Association="Self.FK__Examen__Id_Pacie__571DF1D5">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Examen" EntitySet="Examen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tratamien__Id_Pa__5441852A" Association="Self.FK__Tratamien__Id_Pa__5441852A">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Tratamiento" EntitySet="Tratamientoes" />
+          </AssociationSet>
+          <EntitySet Name="Chats" EntityType="MiBeBe_DatabaseModel.Chat" />
+          <AssociationSet Name="FK__Chat__Id_Doctor__5FB337D6" Association="MiBeBe_DatabaseModel.FK__Chat__Id_Doctor__5FB337D6">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Chat" EntitySet="Chats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Chat__Id_Pacient__5EBF139D" Association="MiBeBe_DatabaseModel.FK__Chat__Id_Pacient__5EBF139D">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Chat" EntitySet="Chats" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="Id_Chat" />
+          </Key>
+          <Property Name="Id_Chat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="Int32" />
+          <Property Name="Cuerpo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Paciente" Type="Int32" />
+          <Property Name="Id_Doctor" Type="Int32" />
+          <NavigationProperty Name="Doctor" Relationship="MiBeBe_DatabaseModel.FK__Chat__Id_Doctor__5FB337D6" FromRole="Chat" ToRole="Doctor" />
+          <NavigationProperty Name="Paciente" Relationship="MiBeBe_DatabaseModel.FK__Chat__Id_Pacient__5EBF139D" FromRole="Chat" ToRole="Paciente" />
+        </EntityType>
+        <Association Name="FK__Chat__Id_Doctor__5FB337D6">
+          <End Type="MiBeBe_DatabaseModel.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <End Type="MiBeBe_DatabaseModel.Chat" Role="Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id_Doctor" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Id_Doctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Chat__Id_Pacient__5EBF139D">
+          <End Type="MiBeBe_DatabaseModel.Paciente" Role="Paciente" Multiplicity="0..1" />
+          <End Type="MiBeBe_DatabaseModel.Chat" Role="Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id_Paciente" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Id_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MiBeBe_DatabaseModelStoreContainer" CdmEntityContainer="MiBeBe_DatabaseEntities">
+          <EntitySetMapping Name="Citas">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.Cita">
+              <MappingFragment StoreEntitySet="Cita">
+                <ScalarProperty Name="Id_Cita" ColumnName="Id_Cita" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="EdadGestacional" ColumnName="EdadGestacional" />
+                <ScalarProperty Name="Id_Paciente" ColumnName="Id_Paciente" />
+                <ScalarProperty Name="PA" ColumnName="PA" />
+                <ScalarProperty Name="AlturaUterina" ColumnName="AlturaUterina" />
+                <ScalarProperty Name="Presentacion" ColumnName="Presentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CitaProgramadas">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.CitaProgramada">
+              <MappingFragment StoreEntitySet="CitaProgramada">
+                <ScalarProperty Name="Id_Cita" ColumnName="Id_Cita" />
+                <ScalarProperty Name="Id_Paciente" ColumnName="Id_Paciente" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Id_Doctor" ColumnName="Id_Doctor" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examen">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.Examan">
+              <MappingFragment StoreEntitySet="Examen">
+                <ScalarProperty Name="Id_Examen" ColumnName="Id_Examen" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Resultados" ColumnName="Resultados" />
+                <ScalarProperty Name="Id_Paciente" ColumnName="Id_Paciente" />
+                <ScalarProperty Name="Interpretacion" ColumnName="Interpretacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoSaluds">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.InfoSalud">
+              <MappingFragment StoreEntitySet="InfoSalud">
+                <ScalarProperty Name="Id_Info" ColumnName="Id_Info" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacientes">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="Id_Paciente" ColumnName="Id_Paciente" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="US" ColumnName="US" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tratamientoes">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.Tratamiento">
+              <MappingFragment StoreEntitySet="Tratamiento">
+                <ScalarProperty Name="Id_Tratamiento" ColumnName="Id_Tratamiento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id_Paciente" ColumnName="Id_Paciente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="Dosis" ColumnName="Dosis" />
+                <ScalarProperty Name="Tiempo" ColumnName="Tiempo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="US">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.US">
+              <MappingFragment StoreEntitySet="US">
+                <ScalarProperty Name="Id_US" ColumnName="Id_US" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chats">
+            <EntityTypeMapping TypeName="MiBeBe_DatabaseModel.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="Id_Doctor" ColumnName="Id_Doctor" />
+                <ScalarProperty Name="Id_Paciente" ColumnName="Id_Paciente" />
+                <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Id_Chat" ColumnName="Id_Chat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
