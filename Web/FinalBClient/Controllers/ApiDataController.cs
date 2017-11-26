@@ -1,5 +1,6 @@
 ﻿using FinalBClient.ModelDB;
 using FinalBClient.Models;
+using FinalBClient.ServiceReference1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace FinalBClient.Controllers
         {
             Db = new MiBeBe_DatabaseEntities();
             //Evitar problema de referencia circular -- check foreing key --
-            Db.Configuration.ProxyCreationEnabled = true;
+            Db.Configuration.ProxyCreationEnabled = false;
         }
 
 
@@ -33,10 +34,8 @@ namespace FinalBClient.Controllers
                 Nombres = Person.Nombres,
                 Apellidos = Person.Apellidos,
                 Cedula = Person.Cedula,
-                Telefono = Person.Telefono,
                 Domicilio = Person.Domicilio,
                 Localidad = Person.Localidad,
-                FechaNac = Person.FechaNac,
                 US = Person.US
             };
 
@@ -74,11 +73,17 @@ namespace FinalBClient.Controllers
             paciente.Apellidos = model.Apellidos;
             paciente.US = model.US;
             paciente.Localidad = model.Localidad;
-            paciente.FechaNac = model.FechaNac;
             paciente.Domicilio = model.Domicilio;
-            paciente.Telefono = model.Telefono;
 
             return Json(Db.SaveChanges(), JsonRequestBehavior.AllowGet);
+        }
+
+        //GET: ApiData
+
+        public JsonResult GetListPeople()
+        {
+            //Retornar json con todos los datos de todos los pacientes.
+            return Json(Db.Pacientes.AsEnumerable(), JsonRequestBehavior.AllowGet);
         }
 
         //GET: ApiData
@@ -89,7 +94,17 @@ namespace FinalBClient.Controllers
             return Json(Db.Pacientes.AsEnumerable().FirstOrDefault(p => p.Cedula == cel), JsonRequestBehavior.AllowGet);
         }
 
-
         //Mas Codigo incoming
+
+        public JsonResult SendSMS(DataBindSMSModel model)
+        {
+            /*Al ser unicamente un prototipo, estamos guardando un mensaje en nuestra db, el cual sera tomando
+            por la app movil. --No es posible hacer un sistema completo de mensajeria en dos dias, 
+            para nosotros :D hay mucho que se debe tomar en cuenta para lograrlo --*/
+
+            Service1Client s = new Service1Client();
+            var r = s.Ins(string.Format("insert into chat values(74757879,'{0}', 1, 1)", model.SmsBody));
+            return Json("1", JsonRequestBehavior.AllowGet);
+        }
     }
 }

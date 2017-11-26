@@ -20,7 +20,7 @@ namespace FinalBClient.ModelDB
             this.Citas = new HashSet<Cita>();
             this.Examen = new HashSet<Examan>();
             this.Tratamientoes = new HashSet<Tratamiento>();
-            this.Chats = new HashSet<Chat>();
+            this.Chats = new HashSet<Chats>();
         }
     
         public int Id_Paciente { get; set; }
@@ -41,6 +41,6 @@ namespace FinalBClient.ModelDB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tratamiento> Tratamientoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Chat> Chats { get; set; }
+        public virtual ICollection<Chats> Chats { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace FinalBClient.Models
     {
     }
 
+    //Modelo para ingreso de nuevo paciente
     public class PacienteModel
     {
         public string Cedula { get; set; }
@@ -16,13 +17,17 @@ namespace FinalBClient.Models
         public string Apellidos { get; set; }
         public string Domicilio { get; set; }
         public string Localidad { get; set; }
-        public int Telefono { get; set; }
-        public DateTime FechaNac { get; set; }
         public string US { get; set; }
     }
 
+    //Modelo para Borrar o quizas actualizar tambien
     public class ModelDeleteOrUpdatePeople
     {
         public string Cedula { get; set; }
+    }
+
+    public class DataBindSMSModel
+    {
+        public string SmsBody { get; set; }
     }
 }

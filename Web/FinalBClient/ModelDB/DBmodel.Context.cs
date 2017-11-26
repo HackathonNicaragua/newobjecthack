@@ -33,6 +33,6 @@ namespace FinalBClient.ModelDB
         public virtual DbSet<Paciente> Pacientes { get; set; }
         public virtual DbSet<Tratamiento> Tratamientoes { get; set; }
         public virtual DbSet<US> US { get; set; }
-        public virtual DbSet<Chat> Chats { get; set; }
+        public virtual DbSet<Chats> Chats { get; set; }
     }
 }
