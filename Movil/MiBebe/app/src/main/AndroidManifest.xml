@@ -22,14 +22,8 @@
             android:name=".Activity_chat"
             android:label="@string/title_activity_chat"
                   android:theme="@style/AppTheme"></activity>
-
-
         <activity android:name=".Examenes">
 
-        </activity>
-
-        <activity android:name=".Chat">
-            
         </activity>
     </application>
 
