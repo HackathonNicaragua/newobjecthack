@@ -13,6 +13,7 @@ public class Database extends SQLiteOpenHelper {
 
         //Sentencia SQL para crear la tabla de contacto
         String sqlCreateCitas = "CREATE TABLE Citas (ID INTEGER PRIMARY KEY,Nombre TEXT, Notificacion TEXT, Aviso INTEGER)";
+        String sqlmensajes = "CREATE TABLE message (IDchat INTEGER PRIMARY KEY,Numero TEXT, Cuerpo TEXT, idpaciente INTEGER, iddoctor INTEGER)";
 
 
     public Database(Context contexto, String nombre,
@@ -22,20 +23,22 @@ public class Database extends SQLiteOpenHelper {
     }
 
         @Override
-        public void onCreate(SQLiteDatabase db) {
-            // TODO Auto-generated method stub
-            db.execSQL(sqlCreateCitas);
-            //db.execSQL(sqlCreatesms);
-        }
+    public void onCreate(SQLiteDatabase db) {
+        // TODO Auto-generated method stub
+        db.execSQL(sqlCreateCitas);
+        db.execSQL(sqlmensajes);
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 
             //Se elimina la versión anterior de la tabla
             db.execSQL("DROP TABLE IF EXISTS Citas");
+            db.execSQL("DROP TABLE IF EXISTS message");
 
             //Se crea la nueva versión de la tabla
             db.execSQL(sqlCreateCitas);
+            db.execSQL(sqlmensajes);
 
 
     }
