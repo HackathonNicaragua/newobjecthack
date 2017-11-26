@@ -21,7 +21,7 @@
             android:name=".Activity_chat"
             android:label="@string/title_activity_chat"
             android:theme="@style/AppTheme"></activity>
-
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
