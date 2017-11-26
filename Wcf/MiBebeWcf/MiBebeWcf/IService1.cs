@@ -21,10 +21,10 @@ namespace MiBebeWcf
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         [OperationContract]
-        DataTable GetD(string query);
+        string GetChat(string query);
 
         [OperationContract]
-        Boolean Ins(string query);
+        string Ins(string query);
 
         // TODO: agregue aquí sus operaciones de servicio
     }

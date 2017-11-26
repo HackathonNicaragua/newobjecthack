@@ -33,12 +33,30 @@ namespace MiBebeWcf
 
         Connection c;
 
-        public DataTable GetD(string query)
+        public string GetChat(string query)
         {
             try
             {
+                //List<chat> lc = new List<chat>();
+                string resultado ="";
                 c = new Connection();
-                return c.buscar(query);
+                var dt =c.buscar(query);
+
+
+                foreach (DataRow r in dt.Rows)
+                {
+                    //chat c = new chat();
+                    resultado += r[0].ToString() + ";";
+                    resultado += r[1].ToString() + ";";
+                    resultado += r[2].ToString() + ";";
+                    resultado += r[3].ToString() + ";";
+                    resultado += r[4].ToString() + ";";
+                    resultado += "|";
+                    //lc.Add(c);
+                }
+                //return dt.Select().ToList();
+
+                return resultado;
             }
             catch
             {
@@ -46,16 +64,23 @@ namespace MiBebeWcf
             }
         }
 
-        public Boolean Ins(string query)
+        public string Ins(string query)
         {
             try
             {
                 c = new Connection();
-                return c.insertar(query);
+                if(c.insertar(query))
+                {
+                    return "OK";
+                }
+                else
+                {
+                    return "No";
+                }
             }
             catch
             {
-                return false;
+                return "No exc";
             }
         }
     }
