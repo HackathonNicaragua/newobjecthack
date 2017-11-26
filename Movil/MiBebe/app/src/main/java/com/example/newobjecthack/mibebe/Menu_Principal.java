@@ -25,6 +25,7 @@ public class Menu_Principal extends AppCompatActivity{
     ImageButton btn_citas;
     ImageButton btn_examenes;
     ImageButton btn_chat;
+    ImageButton btn_acercade;
 
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -50,6 +51,7 @@ public class Menu_Principal extends AppCompatActivity{
         btn_citas= (ImageButton) findViewById(R.id.btn_citas);
         btn_examenes = (ImageButton) findViewById(R.id.btn_examenes);
         btn_chat = (ImageButton) findViewById(R.id.btn_chat);
+        btn_acercade= (ImageButton) findViewById(R.id.btn_acercade);
 
 
         btn_citas.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +61,17 @@ public class Menu_Principal extends AppCompatActivity{
                 //Iniciar Activity Citas
 
                 Intent MyIntent= new Intent(Menu_Principal.this, Citas.class);
+                startActivity(MyIntent);
+            }
+        });
+
+        btn_acercade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Iniciar Activity Acercade
+
+                Intent MyIntent= new Intent(Menu_Principal.this, Presentacion.class);
                 startActivity(MyIntent);
             }
         });
@@ -80,7 +93,7 @@ public class Menu_Principal extends AppCompatActivity{
 
                 //Iniciar Activity Chat
 
-                Intent Myintent= new Intent(Menu_Principal.this, Activity_chat.class);
+                Intent Myintent= new Intent(Menu_Principal.this,Activity_chat.class);
                 startActivity(Myintent);
             }
         });

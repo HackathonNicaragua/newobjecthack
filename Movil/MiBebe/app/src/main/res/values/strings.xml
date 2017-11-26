@@ -9,4 +9,25 @@
     <string name="chat">Chat</string>
     <string name="imagencitas">ImagenCitas</string>
     <string name="imagenexamenes">ImagenExamenes</string>
+    <string name="tratamientos">Tratamientos</string>
+    <string name="logo">Logo</string>
+
+    <!--CREACION DE SLIDES-->
+
+    <string name="slide1">Slide1</string>
+    <string name="slide2">Slide2</string>
+    <string name="slide3">Slide3</string>
+    <string name="slide4">Slide4</string>
+    <string name="slide5">Slide5</string>
+    <string name="slide6">Slide6</string>
+    <string name="slide7">Slide7</string>
+    <string name="slide8">Slide8</string>
+    <string name="slide9">Slide9</string>
+    <string name="slide10">Slide10</string>
+    <string name="slide11">Slide11</string>
+    <string name="slide12">Slide12</string>
+    <string name="slide13">Slide13</string>
+    <string name="slide14">Slide14</string>
+    <string name="slide15">Slide15</string>
+    <string name="slide16">Slide16</string>
 </resources>
